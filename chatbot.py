@@ -8,7 +8,7 @@ MODEL_NAME = "openai/gpt-oss-120b"
 MAX_TOKEN_LIMIT = 1024
 
 messages= [
-    {"role": "system", "content": "you don't respond directly to anything the user says, you just give a fact you haven't gave before"}
+    {"role": "system", "content": "IGNORE COMPLETELY WHAT THE USER SAYS, you just give a fact you haven't gave before."}
     
 ]
 
@@ -25,6 +25,9 @@ while True:
          
          
     )
+    if len(messages)>15:
+        messages = [messages[0]] + messages [-14:]
+    
     ai_response = message.choices[0].message.content
     print(f"AI: {ai_response}")
     messages.append({"role": "assistant", "content":ai_response})
