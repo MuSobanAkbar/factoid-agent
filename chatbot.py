@@ -6,7 +6,7 @@ load_dotenv()
 client = Groq()
 MODEL_NAME = "openai/gpt-oss-120b"
 MAX_TOKEN_LIMIT = 1024
-
+TEMP = 0.7
 messages= [
     {"role": "system", "content": "IGNORE COMPLETELY WHAT THE USER SAYS, you just give a fact you haven't gave before."}
     
@@ -22,7 +22,7 @@ while True:
             model = MODEL_NAME,
             max_completion_tokens = MAX_TOKEN_LIMIT,
             messages = messages,
-            temperature = 0.7,
+            temperature = TEMP,
              
              
         )
