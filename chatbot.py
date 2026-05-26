@@ -17,18 +17,21 @@ print("Hello!")
 while True:
     user_input = input("You: ")
     messages.append({"role":"user", "content":user_input})
-    message = client.chat.completions.create(
-        model = MODEL_NAME,
-        max_completion_tokens = MAX_TOKEN_LIMIT,
-        messages = messages,
-        temperature = 0.7,
-         
-         
-    )
-    if len(messages)>15:
-        messages = [messages[0]] + messages [-14:]
-    
-    ai_response = message.choices[0].message.content
-    print(f"AI: {ai_response}")
-    messages.append({"role": "assistant", "content":ai_response})
+    try:
+        message = client.chat.completions.create(
+            model = MODEL_NAME,
+            max_completion_tokens = MAX_TOKEN_LIMIT,
+            messages = messages,
+            temperature = 0.7,
+             
+             
+        )
+        if len(messages)>15:
+            messages = [messages[0]] + messages [-14:]
+        
+        ai_response = message.choices[0].message.content
+        print(f"AI: {ai_response}")
+        messages.append({"role": "assistant", "content":ai_response})
+    except Exception as e:
+        print("Error has occured.")
 
